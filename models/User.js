@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const validator = require("validator");
+import mongoose from "mongoose";
+import validator from "validator";
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema({
         required: [true, "Password required."],
         minlength: 8
     },  
-    token: String
+    token: [String]
 }, {
     timestamps:true
 });
@@ -47,6 +47,6 @@ UserSchema.methods.toJSON = function() {
     return user;
 }
 
-const User = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model('User', UserSchema);
 
-module.exports = User;
+export default UserModel;
