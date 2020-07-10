@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.9.22",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.0"
   },
@@ -22,10 +23,5 @@
   "bugs": {
     "url": "https://github.com/Adrian-M-A/backendEcommerce/issues"
   },
-  "homepage": "https://github.com/Adrian-M-A/backendEcommerce#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "mysql2": "^2.1.0",
-    "sequelize": "^6.3.0"
-  }
+  "homepage": "https://github.com/Adrian-M-A/backendEcommerce#readme"
 }
