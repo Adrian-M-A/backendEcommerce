@@ -14,6 +14,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      ImagePath: {
+        type: Sequelize.STRING
+      },
       price: {
         type: Sequelize.NUMBER
       },
