@@ -28,7 +28,6 @@ const UserSchema = new mongoose.Schema({
             },
             message: props => `${props.value} is not a valid Email!`
         },
-
     },  
     password: {
         type: String,
