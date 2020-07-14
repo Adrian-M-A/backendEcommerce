@@ -18,13 +18,16 @@ module.exports = {
         type: Sequelize.STRING
       },
       price: {
-        type: Sequelize.NUMBER
+        type: Sequelize.FLOAT
       },
       gluten: {
         type: Sequelize.BOOLEAN
       },
       vegetarian: {
         type: Sequelize.BOOLEAN
+      },
+      TypeId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

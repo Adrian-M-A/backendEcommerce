@@ -1,11 +1,10 @@
-import Order from "../models/Order.js";
+const { Order } = require("../models");
 
 const OrderController = {
 
     create(req,res){
         Order.create(req.body)
         .then(order => {
-            Order.addProduct(req.body.products);
             res.status(201).send(order)
         })
         .catch(error =>{
@@ -28,8 +27,8 @@ const OrderController = {
     },
 
     selectedOrder(req,res){
-        const { id } =req.params;
-        Order.FindOne({
+        const { id } = req.params;
+        Order.findOne({
             where:{
                 id: id
             }
@@ -44,12 +43,12 @@ const OrderController = {
     async updateOrder(req,res){
         try {
             const { id } = req.params;
-            const orderUpdated = await Order.update({
+            await Order.update(req.body, {
                 where:{
                     id: id
                 }
             });
-            res.status(201).send(orderUpdated);
+            res.status(201).send({message:"Order succesfully updated."});
             
         } catch (error) {
             console.error(error);
@@ -73,4 +72,4 @@ const OrderController = {
 
 };
 
-export default OrderController;
+module.exports = OrderController;

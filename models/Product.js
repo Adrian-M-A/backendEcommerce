@@ -28,7 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     ImagePath: DataTypes.STRING,
     price: DataTypes.INTEGER,
     gluten: DataTypes.BOOLEAN,
-    vegetarian: DataTypes.BOOLEAN
+    vegetarian: DataTypes.BOOLEAN,
+    TypeId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Product',

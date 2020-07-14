@@ -1,11 +1,11 @@
-import express from "express";
-import "./config/mongoose.js";
-import cors from "./middleware/cors.js";
-import usersRouter from "./routes/users.js";
-import typesRouter from "./routes/types.js";
-import allergensRouter from "./routes/allergens.js";
-import productsRouter from "./routes/products.js";
-import orderRouter from "./routes/orders.js";
+const express = require("express");
+require("./config/mongoose.js");
+const cors = require("./middleware/cors.js");
+const usersRouter = require("./routes/users.js");
+const typesRouter = require ("./routes/types.js");
+const allergensRouter = require("./routes/allergens.js");
+const productsRouter = require("./routes/products.js");
+const orderRouter = require("./routes/orders.js");
 
 
 const app = express();
@@ -13,7 +13,7 @@ const PORT = 3000;
 
 app.use(cors);
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 
 app.use("/users", usersRouter);
 app.use("/types", typesRouter);

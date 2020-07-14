@@ -1,6 +1,6 @@
-import UserModel from "../models/User.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+const UserModel = require("../models/User.js");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const UserController = {
         //Customer registration
@@ -59,4 +59,4 @@ const UserController = {
     }
 }
 
-export default UserController;
+module.exports = UserController;

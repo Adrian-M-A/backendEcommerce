@@ -1,4 +1,4 @@
-import { Allergen } from "../models/Allergen.js";
+const { Allergen } = require("../models");
 
 const AllergenController = {
 
@@ -12,7 +12,7 @@ const AllergenController = {
     },
     allAllergens(req,res){
         Allergen.findAll()
-        .then(allergen => req.send(allergen))
+        .then(allergen => res.send(allergen))
         .catch(error => {
             console.error(error);
             res.status(500).send({message:"There was an error trying to get all the allergens."});
@@ -21,10 +21,10 @@ const AllergenController = {
 
     async oneAllergen(req,res){
         try {
-            const { allergen } = req.params;
+            const { id } = req.params;
             const allergenSelected = await Allergen.findOne({
                 where:{
-                    name: allergen
+                    id: id
                 }
             });
 
@@ -37,13 +37,13 @@ const AllergenController = {
     },
 
     updateAllergen(req,res){
-        const { allergen } = req.params;
-        Allergen.update({
+        const { id } = req.params;
+        Allergen.update(req.body,{
             where: {
-                name: allergen
+                id: id
             }
         })
-        .then(allergen => res.status(201).send(allergen))
+        .then(() => res.status(201).send({message:"Allergen succesfully updated."}))
         .catch(error => {
             console.error(error);
             res.status(500).send({message:"There was an error trying to update the allergen selected."})
@@ -52,10 +52,10 @@ const AllergenController = {
 
     async deleteAllergen(req,res){
         try {
-            const { allergen } = req.params;
+            const { id } = req.params;
             await Allergen.destroy({
                 where:{
-                    name: allergen
+                    id: id
                 }
             });
             res.status(201).send({message:"Allergen succesfully deleted."})
@@ -66,4 +66,4 @@ const AllergenController = {
     }
 };
 
-export default AllergenController;
+module.exports = AllergenController;

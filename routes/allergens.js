@@ -1,12 +1,12 @@
-import express from "express";
-import AllergenController from "../controllers/AllergenController.js";
+const express = require ("express");
+const AllergenController = require ("../controllers/AllergenController.js");
 
 const router = express.Router();
 
-router.post("/create", AllergenController.createAllergen);
-router.get("/all", AllergenController.allAllergens);
-router.get("/selected/:allergen", AllergenController.oneAllergen);
-router.put("/update/:allergen", AllergenController.updateAllergen);
-router.delete("/delete/:allergen", AllergenController.deleteAllergen);
+router.post("/", AllergenController.createAllergen);
+router.get("/", AllergenController.allAllergens);
+router.get("/:id", AllergenController.oneAllergen);
+router.put("/:id", AllergenController.updateAllergen);
+router.delete("/:id", AllergenController.deleteAllergen);
 
-export default router;
+module.exports = router;

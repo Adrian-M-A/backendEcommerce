@@ -1,10 +1,10 @@
-import { Type } from "../models/Type.js";
+const { Type } = require("../models");
 
 const TypeController = {
 
     createType(req,res){
         Type.create(req.body)
-        .then(type => req.send(type))
+        .then(type => res.send(type))
         .catch(error => {
             console.error(error);
             res.status(500).send({message:"There was an error trying to create the type of product."})
@@ -13,7 +13,7 @@ const TypeController = {
 
     allTypes(req,res){
         Type.findAll()
-        .then(types => req.send(types))
+        .then(types => res.send(types))
         .catch(error => {
             console.error(error);
             res.status(500).send({message:"There was an error trying to get all the types of products."});
@@ -22,10 +22,10 @@ const TypeController = {
 
     async oneType(req,res){
         try {
-            const { type } = req.params;
+            const { id } = req.params;
             const typeSelected = await Type.findOne({
                 where:{
-                    type: type
+                    id: id
                 }
             });
             res.status(201).send(typeSelected);
@@ -36,14 +36,14 @@ const TypeController = {
         }        
     },
 
-    updateType(req,res){
-        const { type } = req.params;
-        Type.update({
+     updateType(req,res){
+        const { id } = req.params;
+        Type.update(req.body, {
             where: {
-                type: type
+                id: id
             }
         })
-        .then(type => res.status(201).send(type))
+        .then(() => res.status(201).send({message:"Type succesfully updated."}))
         .catch(error => {
             console.error(error);
             res.status(500).send({message:"There was an error trying to update the type selected."})
@@ -52,13 +52,13 @@ const TypeController = {
 
     async deleteType(req,res){
         try {
-            const { type } = req.params;
+            const { id } = req.params;
             await Type.destroy({
                 where:{
-                    type: type
+                    id: id
                 }
             });
-            res.satatus(201).send({message:"Type succesfully deleted."})
+            res.status(201).send({message:"Type succesfully deleted."})
         } catch (error) {
             console.error(error);
             res.status(500).send({message:"There was an error trying to delete the type selected."})
@@ -66,4 +66,4 @@ const TypeController = {
     }
 }
 
-export default TypeController;
+module.exports = TypeController;

@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       ProductId: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       CustomerId: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       OrderDate: {
         type: Sequelize.DATE
@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       price: {
-        type: Sequelize.NUMBER
+        type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull: false,
