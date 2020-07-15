@@ -1,10 +1,18 @@
-const { Order } = require("../models");
+const { Order, Product, Allergen, Type } = require("../models");
 
 const OrderController = {
 
     create(req,res){
-        Order.create(req.body)
+        
+        Order.create({
+            CustomerId: req.user._id.toString(),
+            DeliveryDate: Date.now(),
+            status: "pending"
+        })
         .then(order => {
+            req.body.products.forEach(product => {
+                order.addProduct(product.id, {through: {quantity: product.quantity}})
+            })
             res.status(201).send(order)
         })
         .catch(error =>{
@@ -16,7 +24,8 @@ const OrderController = {
     async allOrders(req,res){
         try {
             const allOrders = await Order.findAll({
-                limit: 100
+                limit: 100,
+                include:[{model: Product, include: [Allergen, Type]}]
             });
             res.status(201).send(allOrders);
             

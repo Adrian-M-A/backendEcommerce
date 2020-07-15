@@ -4,36 +4,9 @@ const { Op } = require("sequelize");
 const ProductController = {
 
     async create(req,res){
-        try {
-            // // Error checking before adding type to product.
-            // if(req.body.TypeId){
-            //     const TypeDB = await Type.findOne({
-            //         where: {
-            //             id: req.body.TypeId
-            //         }
-            //     })
-            //     if(!TypeDB){
-            //         return res.status(400).send({message:"Type indicated doesn't exist."})
-            //     }
-            // };
-            //     // Product is created
-            // const product = await Product.create(req.body);
-            //     // Error checking before adding allergen to product.
-            // if (req.body.AllergenId){
-            //     const AllergenDB = await Allergen.findOne({
-            //         where:{
-            //             id: req.body.AllergenId
-            //         }
-            //     })
-            //     if(AllergenDB){
-            //         let AllergenProductData = {ProductId: product.id, AllergenId: req.body.AllergenId};
-            //         const allergen = await AllergenProduct.create(AllergenProductData);
-            //         product.addAllergen(allergen);
-            //     }
-            // };
-            
+        try {            
             const product = await Product.create(req.body);
-            product.addAllergen(req.body.allergen)
+            product.addAllergen(req.body.allergens)
             res.status(201).send(product);
             
         } catch (error) {
