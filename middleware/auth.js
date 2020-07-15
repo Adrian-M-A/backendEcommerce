@@ -1,7 +1,7 @@
-import jwt from "jsonwebtoken";
-import UserModel from "../models/User.js";
+const jwt = require("jsonwebtoken");
+const UserModel = require("../models/User.js");
 
-export const auth = async(req, res, next) => {
+const auth = async(req, res, next) => {
     try {
         const token = req.headers.authorization;
         jwt.verify(token,"Sushiya2020");
@@ -24,3 +24,5 @@ export const auth = async(req, res, next) => {
         })
     }
 }
+
+module.exports = auth;

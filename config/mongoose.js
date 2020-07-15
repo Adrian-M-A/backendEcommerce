@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const MONGO_URI = "mongodb+srv://Admin:Sushiya2020@cluster0.9wiyj.mongodb.net/test";
 
@@ -12,4 +12,4 @@ const db = mongoose.connect(MONGO_URI, {
 .catch(console.error)
 
 
-export default db;
+module.exports = db;

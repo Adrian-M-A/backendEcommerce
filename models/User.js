@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
-import validator from "validator";
+const mongoose = require("mongoose");
+const validator = require("validator");
+
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -20,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     },  
     email: {
         type: String,
-        unique: true,
+        unique: [true, "The email is in use."],
         required: [true, "Email required."],
         validate: {
             validator: function(email) {
@@ -28,7 +29,6 @@ const UserSchema = new mongoose.Schema({
             },
             message: props => `${props.value} is not a valid Email!`
         },
-
     },  
     password: {
         type: String,
@@ -49,4 +49,4 @@ UserSchema.methods.toJSON = function() {
 
 const UserModel = mongoose.model('User', UserSchema);
 
-export default UserModel;
+module.exports = UserModel;

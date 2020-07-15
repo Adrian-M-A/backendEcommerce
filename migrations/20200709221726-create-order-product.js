@@ -9,13 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       OrderId: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       ProductId: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
-      Quantity: {
-        type: Sequelize.NUMBER
+      quantity: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
