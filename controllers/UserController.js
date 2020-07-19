@@ -20,22 +20,33 @@ const UserController = {
             const user = await UserModel.findOne({
                 email: req.body.email
             });
+                // Check if user is correct
             if (!user){
-                return res.status(400).send({mesasge:"Wrong credentials."})
-            };
-            const token = jwt.sign({
-                _id:user._id
-            }, "Sushiya2020");
-            await UserModel.findByIdAndUpdate(user._id, {
-                $push: {
-                    token:token
-                }
-            })
-            res.send({
-                user,
-                token
-            })
-
+                return res.status(400).send({message:"Wrong credentials."})
+            } else {
+                let { password } = req.body;
+                let checkPassword = await bcrypt.compare(password, user.password);
+			
+			
+                // Check if password is correct
+                if (!checkPassword) {
+                    res.status(401).send({message:"User not found or wrong password."});				
+                    return;
+                };
+            
+                const token = jwt.sign({
+                    _id:user._id
+                }, "Sushiya2020");
+                await UserModel.findByIdAndUpdate(user._id, {
+                    $push: {
+                        token:token
+                    }
+                })
+                res.send({
+                    user,
+                    token
+                })
+            }
         } catch (error) {
             console.error(error);
             res.status(500).send({message:"There was a problem trying to log in user."});
