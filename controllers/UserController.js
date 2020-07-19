@@ -26,8 +26,6 @@ const UserController = {
             } else {
                 let { password } = req.body;
                 let checkPassword = await bcrypt.compare(password, user.password);
-			
-			
                 // Check if password is correct
                 if (!checkPassword) {
                     res.status(401).send({message:"User not found or wrong password."});				
