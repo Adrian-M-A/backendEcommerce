@@ -129,6 +129,18 @@ const ProductController = {
             res.status(500).send({message:"There was an error trying to get gluten free products."})
         })
     },
+    vegan(req,res){
+        Product.findAll({
+            where: {
+                vegetarian: true
+            }
+        })
+        .then(products => res.status(201).send(products))
+        .catch(error => {
+            console.error(error);
+            res.status(500).send({message:"There was an error trying to get vegetarian products."})
+        })
+    },
 
     updateProduct(req,res){
         const { id } =  req.params;
